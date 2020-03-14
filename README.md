@@ -18,6 +18,11 @@ npm install
 npm run migrate
 env MIGRATION_DATBASE_NAME=spaced-repetition-test npm run migrate
 ```
+```bash
+psql -U dunder_mufflin -d spaced-repetition -f ./seeds/seed.tables.sql
+```
+to seed
+
 
 And `npm test` should work at this point
 
