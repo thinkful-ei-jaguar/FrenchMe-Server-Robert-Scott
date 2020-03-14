@@ -6,8 +6,9 @@ If using user `dunder-mifflin`:
 
 ```bash
 mv example.env .env
-createdb -U dunder-mifflin spaced-repetition
-createdb -U dunder-mifflin spaced-repetition-test
+createuser dunder_mufflin
+createdb -U dunder_mufflin spaced-repetition
+createdb -U dunder_mufflin spaced-repetition-test
 ```
 
 If your `dunder-mifflin` user has a password be sure to set it in `.env` for all appropriate fields. Or if using a different user, update appropriately.
