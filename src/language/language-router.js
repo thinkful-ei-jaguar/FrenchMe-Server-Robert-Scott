@@ -62,8 +62,23 @@ languageRouter
 
 languageRouter
   .post('/guess', async (req, res, next) => {
-    // implement me
-    res.send('implement me!')
+    try {
+      const {guess,id} = req.body;
+      const words = await LanguageService.getLanguageWords(
+        req.app.get('db'),
+        req.language.id,
+      )
+      
+
+
+
+      next()
+    }catch (error) {
+        next(error)
+      }
+    const { guess } = req.body;
+
+
   })
 
 module.exports = languageRouter
