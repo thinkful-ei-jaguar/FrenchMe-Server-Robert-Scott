@@ -43,8 +43,20 @@ const LanguageService = {
     )
     .where({ language_id })
     return a.map(word=>ll.insertLast(word));
+  },
+  insertnelinkedlist(db,language_id,ll){
+    //for each node in linked list insert row into table
+    let temp=ll.head;
+    //db.raw(`TRUNCATE word`);
+    //truncate not working
+    /*while(temp){
+      db
+      .where({language_id})
+      .from('word')
+      .insert(temp);
+      temp=temp.next;
+    }*/
   }
-
 }
 
 module.exports = LanguageService

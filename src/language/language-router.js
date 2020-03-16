@@ -84,7 +84,7 @@ languageRouter
 
         //push from list
         //m = link.head.value.memory_value;
-        m=2;
+        m=1;
         temp = link.head;
         //while head && mem val is less than 0
         console.log(link.head);
@@ -108,9 +108,9 @@ languageRouter
           m--;
         }
         console.log(link.head);
-      } else {
-
+        LanguageService.insertnelinkedlist(req.app.get('db'),req.language.id,link);
       }
+      
 
       //console.log(guess);
       //console.log(id);
