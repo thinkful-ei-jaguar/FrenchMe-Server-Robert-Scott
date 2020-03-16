@@ -28,6 +28,23 @@ const LanguageService = {
       )
       .where({ language_id })
   },
+  PopulateLinkedlist(db,language_id,ll){
+    const a = db
+    .from('word')
+    .select(
+      'id',
+      'language_id',
+      'original',
+      'translation',
+      'next',
+      'memory_value',
+      'correct_count',
+      'incorrect_count',
+    )
+    .where({ language_id })
+    return a.map(word=>ll.insertLast(word));
+  }
+
 }
 
 module.exports = LanguageService

@@ -1,8 +1,9 @@
 const express = require('express');
 const LanguageService = require('./language-service');
 const { requireAuth } = require('../middleware/jwt-auth');
-const LinkedList = require('../linkedList');
-const languageRouter = express.Router()
+const {LinkedList} = require('../linkedList');
+const languageRouter = express.Router();
+const bodyParser=express.json();
 
 languageRouter
   .use(requireAuth)
@@ -61,23 +62,41 @@ languageRouter
   })
 
 languageRouter
-  .post('/guess', async (req, res, next) => {
+  .post('/guess',bodyParser, async (req, res, next) => {
     try {
       const {guess,id} = req.body;
-      const words = await LanguageService.getLanguageWords(
+      const link = new LinkedList;
+      //populate list
+      const words = await LanguageService.PopulateLinkedlist(
         req.app.get('db'),
         req.language.id,
+        link
       )
+      //console.log(link.head);
+      //check if right or wrong
+      if(guess==link.head.value.translation){
+        console.log("they got their answer right")
+        //multiply by 2
+        link.head.value.memory_value*2;
+        link.head.value.correct_count++;
+        //push from list
+        m=link.head.value.memory_value;
+        temp=link.head;
+        while(temp&&m>0){
+
+          
+        }
+      }
+
+      //console.log(guess);
+      //console.log(id);
+
       
-
-
-
+      //console.log(link);
       next()
     }catch (error) {
-        next(error)
-      }
-    const { guess } = req.body;
-
+      next(error)
+    }
 
   })
 
