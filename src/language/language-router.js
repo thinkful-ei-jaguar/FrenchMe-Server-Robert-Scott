@@ -81,15 +81,33 @@ languageRouter
         //add 1 to the correct counter
         link.head.value.correct_count++;
         //add 1 to the total score counter
-        
+
         //push from list
-        m = link.head.value.memory_value;
+        //m = link.head.value.memory_value;
+        m=2;
         temp = link.head;
         //while head && mem val is less than 0
+        console.log(link.head);
         while(temp && m > 0){
-          temp = temp.next
-          
+          let toriginal =temp.value.original;
+          let ttranslation=temp.value.translation;
+          let tcorrect_count=temp.value.correct_count;
+          let tincorrect_count=temp.value.incorrect_count;
+          let tm  = temp.value.memory_value;
+          temp.value.original=temp.next.value.original;
+          temp.value.translation=temp.next.value.translation;
+          temp.value.correct_count=temp.next.value.correct_count;
+          temp.value.incorrect_count=temp.next.value.incorrect_count;
+          temp.value.memory_value=temp.next.value.memory_value;
+          temp.next.value.original=toriginal;
+          temp.next.value.translation=ttranslation;
+          temp.next.value.correct_count=tcorrect_count;
+          temp.next.value.incorrect_count=tincorrect_count;
+          temp.next.value.memory_value=tm;
+          temp=temp.next;
+          m--;
         }
+        console.log(link.head);
       } else {
 
       }
