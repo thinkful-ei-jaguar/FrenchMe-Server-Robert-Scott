@@ -74,18 +74,24 @@ languageRouter
       )
       //console.log(link.head);
       //check if right or wrong
-      if(guess==link.head.value.translation){
+      if(guess == link.head.value.translation){
         console.log("they got their answer right")
-        //multiply by 2
-        link.head.value.memory_value*2;
+        //multiply mem val by 2
+        link.head.value.memory_value *= 2;
+        //add 1 to the correct counter
         link.head.value.correct_count++;
+        //add 1 to the total score counter
+        
         //push from list
-        m=link.head.value.memory_value;
-        temp=link.head;
-        while(temp&&m>0){
-
+        m = link.head.value.memory_value;
+        temp = link.head;
+        //while head && mem val is less than 0
+        while(temp && m > 0){
+          temp = temp.next
           
         }
+      } else {
+
       }
 
       //console.log(guess);
