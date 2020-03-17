@@ -76,6 +76,11 @@ languageRouter
         req.app.get('db'),
         req.user.id,
       )
+      let responce = {
+          nextWord: words[1].original,  
+      }
+
+
   
       //check if right or wrong
      if(guess == link.head.value.translation){
@@ -87,15 +92,31 @@ languageRouter
         //add 1 to the total score counter
         console.log("ok");
         language.total_score+=1;
+        let increment=words[0].correct_count;
+        increment++;
+        responce={...responce,
+          wordCorrectCount: increment,
+          wordIncorrectCount: words[0].incorrect_count,
+          totalScore: language.total_score,
+          answer: words[0].translation,
+          isCorrect:true,
+        }
       }else{
         link.head.value.incorrect_count++;
+        let decrement=words[0].incorrect_count;
+        decrement++;
+        responce={...responce,
+          wordCorrectCount: words[0].correct_count,
+          wordIncorrectCount: decrement,         
+          totalScore: language.total_score,
+          answer: words[0].translation,
+          isCorrect:false,
+        }
       }
         //push from list
-        //m = link.head.value.memory_value;
-        m=1;
+        m = link.head.value.memory_value;
         temp = link.head;
         //while head && mem val is less than 0
-        //console.log(link.head);
         while(temp && m > 0){
           //first temp original value 1-2-3
           //2-1-3
@@ -133,16 +154,7 @@ languageRouter
 
         // LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
         // LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
-
-        return res.json({
-          nextWord: link.head.value.original,
-          wordCorrectCount: words[0].correct_count,
-          wordIncorrectCount: words[0].incorrect_count,
-          totalScore: language.total_score,
-          answer: words[0].translation,
-          isCorrect: false
-        }),
-         
+        return res.json(responce),
         next();
     } catch (error) {
       next(error)
