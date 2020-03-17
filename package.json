@@ -1,7 +1,7 @@
 {
-  "name": "express-boilerplate",
+  "name": "FrenchMoi",
   "version": "0.0.1",
-  "description": "",
+  "description": "A web application to help you learn French using Spaced Repetition",
   "main": "src/server.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
@@ -12,7 +12,7 @@
     "deploy": "git push heroku master"
   },
   "keywords": [],
-  "author": "Tom `tomatao` HT <tomht@thinkful.com>",
+  "author": "Scott Lingner & Robert Perez",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

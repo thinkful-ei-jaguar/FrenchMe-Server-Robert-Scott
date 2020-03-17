@@ -5,4 +5,4 @@ module.exports = {
     || 'postgresql://dunder_mufflin@localhost/spaced-repetition',
   JWT_SECRET: process.env.JWT_SECRET || 'secret',
   JWT_EXPIRY: process.env.JWT_EXPIRY || '3h',
-}
+};
