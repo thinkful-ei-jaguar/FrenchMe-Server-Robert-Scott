@@ -103,6 +103,7 @@ languageRouter
         }
       }else{
         link.head.value.incorrect_count++;
+        link.head.value.memory_value = 1;
         let decrement=words[0].incorrect_count;
         decrement++;
         responce={...responce,
