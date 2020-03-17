@@ -151,14 +151,13 @@ languageRouter
           linkarr.push(arrtemp.value);
           arrtemp = arrtemp.next;
         }
-        // LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
-        // LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
+        LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
+        LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
         return res.json(responce),
         next();
     } catch (error) {
       next(error)
     }
-
   })
 
 module.exports = languageRouter
