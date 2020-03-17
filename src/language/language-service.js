@@ -42,10 +42,11 @@ const LanguageService = {
         'incorrect_count'
       )
       .where({ language_id });
-    return a.map(word=>ll.insertLast(word));
+    a.map(word => ll.insertLast(word))
+    return a;
   },
   async insertNewLinkedList(db,ll){
-    for(let i =0;i<ll.length;i++){
+    for(let i = 0; i < ll.length; i++){
     await db('word').where('id','=',ll[i].id)
           .update(ll[i])
     }  

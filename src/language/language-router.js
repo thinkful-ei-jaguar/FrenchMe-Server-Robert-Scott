@@ -64,7 +64,7 @@ languageRouter
 languageRouter
   .post('/guess',bodyParser, async (req, res, next) => {
     try {
-      const {guess,id} = req.body;
+      const {guess} = req.body;
       const link = new LinkedList;
       //populate list
       const words = await LanguageService.PopulateLinkedlist(
@@ -72,11 +72,11 @@ languageRouter
         req.language.id,
         link
       )
-      const language=  await LanguageService.getUsersLanguage(
+      const language = await LanguageService.getUsersLanguage(
         req.app.get('db'),
         req.user.id,
       )
-      //console.log(link.head);
+  
       //check if right or wrong
      if(guess == link.head.value.translation){
         console.log("they got their answer right")
@@ -128,14 +128,23 @@ languageRouter
         linkarr=[]
         while(arrtemp){
           linkarr.push(arrtemp.value);
-          arrtemp=arrtemp.next;
+          arrtemp = arrtemp.next;
         }
-        
-        console.log(language);
-        LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
-        LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
-        next()
-    }catch (error) {
+
+        // LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
+        // LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
+
+        return res.json({
+          nextWord: link.head.value.original,
+          wordCorrectCount: words[0].correct_count,
+          wordIncorrectCount: words[0].incorrect_count,
+          totalScore: language.total_score,
+          answer: words[0].translation,
+          isCorrect: false
+        }),
+         
+        next();
+    } catch (error) {
       next(error)
     }
 
