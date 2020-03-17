@@ -44,22 +44,17 @@ const LanguageService = {
       .where({ language_id });
     return a.map(word=>ll.insertLast(word));
   },
-  insertNewLinkedList(db,language_id,ll){
-    //for each node in linked list insert row into table
-    let temp=ll.head;
-    //db.raw(`TRUNCATE TABLE word, language CASCADE`);
-    db('word').truncate();
-
-    //truncate not working
-    while(temp){
-      console.log(temp);
-      db
-      .where({language_id})
-      .from('word')
-      .insert(temp);
-      temp=temp.next;
-    }
-  }
+  async insertNewLinkedList(db,ll){
+    for(let i =0;i<ll.length;i++){
+    await db('word').where('id','=',ll[i].id)
+          .update(ll[i])
+    }  
+    return 
+  },
+  async updateLanguagetotalScore(db,language){
+    await db('language').where('user_id','=',language.user_id)
+          .update(language)
+  },
 };
 
 module.exports = LanguageService;

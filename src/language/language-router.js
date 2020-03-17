@@ -72,6 +72,10 @@ languageRouter
         req.language.id,
         link
       )
+      const language=  await LanguageService.getUsersLanguage(
+        req.app.get('db'),
+        req.user.id,
+      )
       //console.log(link.head);
       //check if right or wrong
      if(guess == link.head.value.translation){
@@ -81,6 +85,8 @@ languageRouter
         //add 1 to the correct counter
         link.head.value.correct_count++;
         //add 1 to the total score counter
+        console.log("ok");
+        language.total_score+=1;
       }else{
         link.head.value.incorrect_count++;
       }
@@ -89,24 +95,32 @@ languageRouter
         m=1;
         temp = link.head;
         //while head && mem val is less than 0
-        console.log(link.head);
+        //console.log(link.head);
         while(temp && m > 0){
+          //first temp original value 1-2-3
+          //2-1-3
           let toriginal =temp.value.original;
           let ttranslation=temp.value.translation;
           let tcorrect_count=temp.value.correct_count;
           let tincorrect_count=temp.value.incorrect_count;
           let tm  = temp.value.memory_value;
+          //change that value to the next 2-2-3
+          //2-3-3
           temp.value.original=temp.next.value.original;
           temp.value.translation=temp.next.value.translation;
           temp.value.correct_count=temp.next.value.correct_count;
           temp.value.incorrect_count=temp.next.value.incorrect_count;
           temp.value.memory_value=temp.next.value.memory_value;
+          //replace the value 2-2-3
+          //replace the value 2-3-3
           temp.next.value.original=toriginal;
           temp.next.value.translation=ttranslation;
           temp.next.value.correct_count=tcorrect_count;
           temp.next.value.incorrect_count=tincorrect_count;
           temp.next.value.memory_value=tm;
           temp=temp.next;
+          //2-1-3
+          //2-3-1
           m--;
         }
         //if we want an array
@@ -116,12 +130,11 @@ languageRouter
           linkarr.push(arrtemp.value);
           arrtemp=arrtemp.next;
         }
-        console.log(linkarr[0]);
         
-
-        //console.log(link.head);
-        //LanguageService.insertNewLinkedList(req.app.get('db'),req.language.id,link);
-      next()
+        console.log(language);
+        LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
+        LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
+        next()
     }catch (error) {
       next(error)
     }

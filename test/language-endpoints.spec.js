@@ -274,7 +274,7 @@ describe('Language Endpoints', function () {
             wordIncorrectCount: 0,
             answer: testLanguagesWords[2].translation,
             isCorrect: true
-          })
+        })
       })
     })
   })
