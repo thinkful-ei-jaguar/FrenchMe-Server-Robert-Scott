@@ -77,7 +77,12 @@ languageRouter
         req.user.id,
       )
       let response = {
-          nextWord: words[1].original,  
+          nextWord: words[1].original,
+          wordCorrectCount: words[1].correct_count,
+          wordIncorrectCount: words[1].incorrect_count,
+          totalScore: language.total_score,
+          answer: words[0].translation,
+          isCorrect: true,  
       }
 
       //check if right or wrong
@@ -88,27 +93,13 @@ languageRouter
         link.head.value.correct_count++;
         //add 1 to the total score counter
         language.total_score += 1;
-        let increment = words[0].correct_count;
-        increment++;
-
         response = {...response,
-          wordCorrectCount: increment,
-          wordIncorrectCount: words[0].incorrect_count,
-          totalScore: language.total_score,
-          answer: words[0].translation,
           isCorrect: true,
         }
       } else {
         link.head.value.incorrect_count++;
         link.head.value.memory_value = 1;
-        let decrement=words[0].incorrect_count;
-        decrement++;
-        
         response = {...response,
-          wordCorrectCount: words[0].correct_count,
-          wordIncorrectCount: decrement,         
-          totalScore: language.total_score,
-          answer: words[0].translation,
           isCorrect: false,
         }
       }
