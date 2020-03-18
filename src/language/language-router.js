@@ -1,4 +1,5 @@
 const express = require('express');
+const xss = require('xss');
 const LanguageService = require('./language-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 const { LinkedList } = require('../linkedList');
@@ -62,6 +63,8 @@ languageRouter
   .post('/guess',bodyParser, async (req, res, next) => {
     try {
       const {guess} = req.body;
+
+      let xssGuess = xss(guess);
       const link = new LinkedList;
       //populate list
       const words = await LanguageService.PopulateLinkedlist(
@@ -78,7 +81,7 @@ languageRouter
       }
 
       //check if right or wrong
-     if(guess == link.head.value.translation){
+     if(xssGuess == link.head.value.translation){
         //multiply mem val by 2
         link.head.value.memory_value *= 2;
         //add 1 to the correct counter
@@ -106,7 +109,7 @@ languageRouter
           wordIncorrectCount: decrement,         
           totalScore: language.total_score,
           answer: words[0].translation,
-          isCorrect:false,
+          isCorrect: false,
         }
       }
         //push from list
@@ -119,7 +122,7 @@ languageRouter
           let ttranslation = temp.value.translation;
           let tcorrect_count = temp.value.correct_count;
           let tincorrect_count = temp.value.incorrect_count;
-          let tm  = temp.value.memory_value;
+          let tm = temp.value.memory_value;
 
           temp.value.original = temp.next.value.original;
           temp.value.translation = temp.next.value.translation;
