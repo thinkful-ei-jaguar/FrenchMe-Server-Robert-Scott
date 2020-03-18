@@ -63,7 +63,6 @@ languageRouter
   .post('/guess',bodyParser, async (req, res, next) => {
     try {
       const {guess} = req.body;
-
       let xssGuess = xss(guess);
       const link = new LinkedList;
       //populate list
@@ -85,9 +84,10 @@ languageRouter
           isCorrect: true,  
       }
 
-     if(xssGuess === '') {
-       res.status(400)
-       next();
+     if(xssGuess === '' || !(req.body.hasOwnProperty('guess'))) {
+       return res.status(400).json({
+        error: `Missing 'guess' in request body`,
+       })
      }
 
       //check if right or wrong
@@ -146,7 +146,7 @@ languageRouter
         LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
         LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
 
-        return res.json(response),
+        res.json(response),
         next();
     } catch (error) {
       next(error)
