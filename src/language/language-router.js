@@ -1,9 +1,9 @@
 const express = require('express');
 const LanguageService = require('./language-service');
 const { requireAuth } = require('../middleware/jwt-auth');
-const {LinkedList} = require('../linkedList');
+const { LinkedList } = require('../linkedList');
 const languageRouter = express.Router();
-const bodyParser=express.json();
+const bodyParser = express.json();
 
 languageRouter
   .use(requireAuth)
@@ -79,7 +79,6 @@ languageRouter
 
       //check if right or wrong
      if(guess == link.head.value.translation){
-        console.log("they got their answer right")
         //multiply mem val by 2
         link.head.value.memory_value *= 2;
         //add 1 to the correct counter
@@ -109,7 +108,6 @@ languageRouter
           answer: words[0].translation,
           isCorrect:false,
         }
-
       }
         //push from list
         m = link.head.value.memory_value;
