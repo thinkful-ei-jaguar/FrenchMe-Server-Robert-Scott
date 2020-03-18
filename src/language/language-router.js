@@ -85,6 +85,11 @@ languageRouter
           isCorrect: true,  
       }
 
+     if(xssGuess === '') {
+       res.status(400)
+       next();
+     }
+
       //check if right or wrong
      if(xssGuess == link.head.value.translation){
         //multiply mem val by 2
