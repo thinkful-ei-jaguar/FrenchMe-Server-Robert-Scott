@@ -146,7 +146,6 @@ languageRouter
         console.log(linkarr);
         LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
         LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
-
         res.json(response),
         next();
     } catch (error) {
