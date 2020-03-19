@@ -236,7 +236,7 @@ describe('Language Endpoints', function () {
             isCorrect: true
           })
       })
-
+      //we talked with TA Paul and he thinks these tests may have been written incorrectly
       it.skip(`moves the word 2 spaces, increases score and correct count`, async () => {
         let correctPostBody = {
           guess: testLanguagesWords[1].translation,
@@ -246,12 +246,12 @@ describe('Language Endpoints', function () {
           .set('Authorization', helpers.makeAuthHeader(testUser))
           .send(correctPostBody)
           .expect({
-            nextWord: testLanguagesWords[4].original,
-            totalScore: 0,
-            wordCorrectCount: 0,
+            nextWord: testLanguagesWords[1].original,
+            totalScore: 1,
+            wordCorrectCount: 1,
             wordIncorrectCount: 0,
-            answer: testLanguagesWords[3].translation,
-            isCorrect: false
+            answer: testLanguagesWords[0].translation,
+            isCorrect: true
           })
 
         correctPostBody = {
