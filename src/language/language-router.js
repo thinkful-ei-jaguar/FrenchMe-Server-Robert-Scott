@@ -111,8 +111,9 @@ languageRouter
         //push from list
         m = link.head.value.memory_value;
         temp = link.head;
+        console.log(link.head);
         //while head && mem val is less than 0
-        while(temp && m > 0){
+        while(temp.next !==null && m > 0){
           //first temp original 
           let toriginal = temp.value.original;
           let ttranslation = temp.value.translation;
@@ -142,7 +143,7 @@ languageRouter
           linkarr.push(arrtemp.value);
           arrtemp = arrtemp.next;
         }
-
+        console.log(linkarr);
         LanguageService.insertNewLinkedList(req.app.get('db'),linkarr);
         LanguageService.updateLanguagetotalScore(req.app.get('db'),language);
 
