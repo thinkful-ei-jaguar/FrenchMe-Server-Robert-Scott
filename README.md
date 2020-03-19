@@ -21,6 +21,7 @@ env MIGRATION_DATBASE_NAME=spaced-repetition-test npm run migrate
 ```bash
 psql -U dunder_mufflin -d spaced-repetition -f ./seeds/seed.tables.sql
 psql -U dunder_mufflin -d spaced-repetition-test -f ./seeds/seed.tables.sql
+heroku pg:psql -U dunder_mufflin -d spaced-repetition-test -f ./seeds/seed.tables.sql
 ```
 to seed
 
