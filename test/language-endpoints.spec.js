@@ -155,7 +155,6 @@ describe('Language Endpoints', function () {
         testLanguages,
         testWords
       )
-      
     })
 
     it(`responds with 400 required error when 'guess' is missing`, () => {
@@ -197,7 +196,7 @@ describe('Language Endpoints', function () {
       const incorrectPostBody = {
         guess: 'incorrect',
       }
-      it.only(`moves the word 1 space and updates incorrect count`, async () => {
+      it(`moves the word 1 space and updates incorrect count`, async () => {
         await supertest(app)
           .post(`/api/language/guess`)
           .set('Authorization', helpers.makeAuthHeader(testUser))
@@ -208,11 +207,11 @@ describe('Language Endpoints', function () {
           .set('Authorization', helpers.makeAuthHeader(testUser))
           .send(incorrectPostBody)
           .expect({
-            nextWord: testLanguagesWords[4].original,
+            nextWord: testLanguagesWords[0].original,
             totalScore: 0,
             wordCorrectCount: 0,
-            wordIncorrectCount: 0,
-            answer: testLanguagesWords[3].translation,
+            wordIncorrectCount: 1,
+            answer: testLanguagesWords[1].translation,
             isCorrect: false
           })
       })
