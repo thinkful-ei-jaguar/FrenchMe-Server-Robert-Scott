@@ -62,6 +62,7 @@ languageRouter
     }
   })
 
+  //O(n) -- linear time complexity because it goes through each item once
 languageRouter
   .post('/guess',bodyParser, async (req, res, next) => {
     //try/catch block to catch the error
