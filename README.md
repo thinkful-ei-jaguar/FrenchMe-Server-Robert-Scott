@@ -2,8 +2,10 @@
 
 ## Client repo and Live app
 
+### Live app
 [https://frenchmoi.now.sh/](https://frenchmoi.now.sh/)
 
+### Client Repo
 [https://github.com/thinkful-ei-jaguar/FrenchMe-Client-Robert-Scott](https://github.com/thinkful-ei-jaguar/FrenchMe-Client-Robert-Scott)
 
 ## Summary
