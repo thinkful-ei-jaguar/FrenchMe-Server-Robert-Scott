@@ -19,7 +19,7 @@ If using user `dunder-mifflin`:
 
 ```bash
 mv example.env .env
-createuser dunder_mufflin //if you donthave one
+createuser dunder_mufflin //if you don't have one
 createdb -U dunder_mufflin spaced-repetition
 createdb -U dunder_mufflin spaced-repetition-test
 ```
