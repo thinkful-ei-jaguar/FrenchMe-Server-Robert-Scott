@@ -1,4 +1,17 @@
-# Spaced repetition API!
+# French Moi API!
+
+## Client repo and Live app
+
+### Live app
+[https://frenchmoi.now.sh/](https://frenchmoi.now.sh/)
+
+### Client Repo
+[https://github.com/thinkful-ei-jaguar/FrenchMe-Client-Robert-Scott](https://github.com/thinkful-ei-jaguar/FrenchMe-Client-Robert-Scott)
+
+## Summary
+French Moi is an app that uses spaced repetition to help users memorize French words The app displays a word in French and then asks the user to recall the corresponding word in English
+
+If the user answers incorrectly, that word will be asked again sooner. If the answer is correct, the user will be asked later on. The user will be able to see their total count of correct guesses as well as the number of times they got each word wrong or right
 
 ## Local dev setup
 
@@ -6,7 +19,7 @@ If using user `dunder-mifflin`:
 
 ```bash
 mv example.env .env
-createuser dunder_mufflin
+createuser dunder_mufflin //if you don't have one
 createdb -U dunder_mufflin spaced-repetition
 createdb -U dunder_mufflin spaced-repetition-test
 ```
@@ -58,3 +71,31 @@ Run the tests mode `npm test`
 Run the migrations up `npm run migrate`
 
 Run the migrations down `npm run migrate -- 0`
+
+## Routes
+### Auth Routes
+
+#### POST api/auth/token
+This post route requires a {username,password} in request body and log in a user.
+This route is used to login to the server and return a jwt token for a user to store in local storage.
+
+### User Routes
+
+####  POST api/user
+This post route requires a {username,password} in request body and post anew user in the database.
+This route is used to create a whole new user in the DB.
+
+
+### Language Routes
+before any request to this route requires auth token to get data from the database.
+
+####  GET api/language
+This route gets all the languages and words for that language with all neccessary information for it.
+
+####  GET api/language/head
+This route gets the head of the words list of the current language the user is using.
+
+####  POST api/language/guess
+This post requires {guess} in request body and lets user post a guess into the database. This routes checks for the current head and compares the guess inserted to the current head of the list.It decrements or increments if the guess is correct or wrong and changes the database current head to the next question.Uses a linked list implementation to establish the list and get populated back into the DB.
+
+
