@@ -42,7 +42,9 @@ const LanguageService = {
         'incorrect_count'
       )
       .where({ language_id });
+      //a.map is populating the LL
     a.map(word => ll.insertLast(word))
+    //return a is returning the aray of words from db
     return a;
   },
   async insertNewLinkedList(db,ll){
